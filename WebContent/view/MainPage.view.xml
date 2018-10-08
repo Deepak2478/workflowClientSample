@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:f="sap.ui.layout.form" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:ui="sap.ca.ui" xmlns:uxap="sap.uxap" height="100%" controllerName="sap.ui.demo.controller.MainPage" displayBlock="true">
+   <SplitContainer id="idSplit">
+      <masterPages>
+         <Page id="masterPage" showFooter="true" showHeader="false" showNavButton="false">
+            <content>
+               <List id="list" items="{ path: '/Data' }" busyIndicatorDelay="{masterView&gt;/delay}" noDataText="{i18nP&gt;ECT_NO_DATA}" mode="{= ${device&gt;/system/phone} ? 'None' : 'SingleSelectMaster'}" growing="true" growingScrollToLoad="true" updateFinished="onUpdateFinished" selectionChange="onSelectionChange">
+                  <items>
+                     <ObjectListItem type="{= ${device&gt;/system/phone} ? 'Active' : 'Inactive'}" press="onSelectionChange" title="{PersonName}" number="{Days}" numberUnit="until cut off" icon="{Image}">
+                        <attributes>
+                           <ObjectAttribute text="{Designation}" />
+                        </attributes>
+                     </ObjectListItem>
+                  </items>
+               </List>
+            </content>
+            <footer>
+               <Toolbar>
+                  <ToolbarSpacer />
+                  <Button icon="sap-icon://sort" />
+                  <Button icon="sap-icon://filter" />
+               </Toolbar>
+            </footer>
+         </Page>
+      </masterPages>
+      <detailPages>
+         <Page id="detailPage" showNavButton="false" showFooter="true" showHeader="false" busy="{detailView&gt;/busy}" busyIndicatorDelay="{detailView&gt;/delay}">
+            <content>
+               <uxap:ObjectPageLayout id="ObjectPageLayout1" enableLazyLoading="false" showTitleInHeaderContent="true" showHeaderContent="true">
+                  <uxap:headerTitle>
+                     <uxap:ObjectPageHeader objectImageURI="{Image}" objectImageShape="Square" objectTitle="{PersonName}" id="ObjectPageLayoutHeaderTitle" isObjectIconAlwaysVisible="false" isObjectTitleAlwaysVisible="false" showPlaceholder="true">
+                      <uxap:breadCrumbsLinks>
+                  		<Link text="Admin Center"/>
+                       </uxap:breadCrumbsLinks>  
+                      </uxap:ObjectPageHeader>      
+                     </uxap:headerTitle>
+                  <uxap:headerContent>
+                     <l:VerticalLayout>
+                        <ObjectStatus title="Designation" text="{Designation}" />
+                        <ObjectStatus title="Email" text="{Email}" />
+                     </l:VerticalLayout>
+                     <l:VerticalLayout>
+                        <l:layoutData>
+                           <uxap:ObjectPageHeaderLayoutData visibleS="false" />
+                        </l:layoutData>
+                        <ObjectStatus title="Location" text="{Location}" />
+                        <ObjectStatus title="Contact no." text="{Phone}" />
+                     </l:VerticalLayout>
+                  </uxap:headerContent>
+                  <uxap:sections>
+                     <uxap:ObjectPageSection title="Details">
+                        <uxap:subSections>
+                           <uxap:ObjectPageSubSection title="Details">
+                              <uxap:blocks>
+                                 <HBox items="{incidents&gt;/IncidentCollection}">
+                                    <Text text="{incidents&gt;title}" />
+                                 </HBox>
+                              </uxap:blocks>
+                           </uxap:ObjectPageSubSection>
+                        </uxap:subSections>
+                     </uxap:ObjectPageSection>
+                     <uxap:ObjectPageSection title="Attachments">
+                        <uxap:subSections>
+                           <uxap:ObjectPageSubSection title="Attachments">
+                              <uxap:blocks>
+                                 <HBox items="{case&gt;/CaseCollection}">
+                                    <Text text="{case&gt;title}" />
+                                 </HBox>
+                              </uxap:blocks>
+                           </uxap:ObjectPageSubSection>
+                         <!--    <uxap:ObjectPageSubSection title="Incidents">
+                              <uxap:blocks>
+                                 <HBox items="{incidents&gt;/IncidentCollection}">
+                                    <Text text="{incidents&gt;title}" />
+                                 </HBox>
+                              </uxap:blocks>
+                           </uxap:ObjectPageSubSection> -->
+                        </uxap:subSections>
+                     </uxap:ObjectPageSection>
+                  </uxap:sections>
+                  
+               </uxap:ObjectPageLayout>
+            </content>
+            <footer>
+               <Toolbar>
+                  <ToolbarSpacer />
+                  <Button text="Done" type="Accept" />
+                  <Button text="Re-assign" />
+                  <Button icon="sap-icon://action" />
+               </Toolbar>
+            </footer>
+         </Page>
+      </detailPages>
+   </SplitContainer>
+</mvc:View>
